@@ -219,7 +219,7 @@ namespace Org.BouncyCastle.Pkcs
                 string ignoreProperty = Platform.GetEnvironmentVariable(IgnoreUselessPasswordProperty);
                 bool ignore = ignoreProperty != null && Platform.EqualsIgnoreCase("true", ignoreProperty);
 
-                if (!ignore)
+                if (!ignore && !IgnoreUselessPassword)
                 {
                     throw new IOException("password supplied for keystore that does not require one");
                 }
@@ -414,6 +414,8 @@ namespace Org.BouncyCastle.Pkcs
             return m_keys.ContainsKey(alias);
         }
 
+        public static bool IgnoreUselessPassword { get;set; }
+        
         public IEnumerable<string> Aliases
         {
             get
